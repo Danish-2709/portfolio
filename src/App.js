@@ -186,34 +186,37 @@ const MotionSection = ({ children, id, className = "" }) => (
   </motion.section>
 );
 
-const Navbar = () => (
+const Navbar = () => {
+  const [open, setOpen] = useState(false);
+  return (
   <motion.nav
-    className="fixed w-full z-50 backdrop-blur-2xl bg-black/60 border-b border-cyan-500/40 px-6 py-4 flex justify-between items-center"
-    initial={{ y: -120 }}
-    animate={{ y: 0 }}
-    transition={{ duration: 0.8, type: "spring" }}
-  >
-    <motion.h1
-      className={`${cyberFont} text-2xl md:text-3xl tracking-widest drop-shadow-lg cursor-pointer`}
-      whileHover={{ scale: 1.05, textShadow: "0 0 20px cyan" }}
-    >
+    className="fixed w-full z-50 backdrop-blur-2xl bg-black/60 border-b border-cyan-500/40 px-6 md:px-6 py-4 flex justify-between items-center"  initial={{ y: -120 }} animate={{ y: 0 }} transition={{ duration: 0.8, type: "spring" }}>
+    <motion.h1 className={`${cyberFont} text-2xl md:text-2xl tracking-widest drop-shadow-lg cursor-pointer`}
+      whileHover={{ scale: 1.05, textShadow: "0 0 20px cyan" }}>
       DANISH.AI
     </motion.h1>
-    <ul className="flex gap-6 text-sm uppercase tracking-wider font-mono">
+    <ul className="hidden md:flex gap-6 text-sm uppercase tracking-wider font-mono">
       {["About", "Experience", "Projects", "Contact"].map((item) => (
         <li key={item}>
-          <a
-            href={`#${item.toLowerCase()}`}
-            className="relative group text-gray-300 hover:text-cyan-300 transition-all duration-300 text-[15px] font-semibold"
-          >
+          <a href={`#${item.toLowerCase()}`} className="relative group text-gray-300 hover:text-cyan-300 transition-all duration-300 text-[15px] font-semibold">
             {item}
             <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-cyan-400 group-hover:w-full transition-all duration-300" />
           </a>
         </li>
       ))}
     </ul>
+    <button className="md:hidden text-cyan-400 text-xl" onClick={() => setOpen(!open)}>☰</button>
+    {open && (
+        <div className="absolute top-16 left-0 w-full bg-black/90 backdrop-blur-md flex flex-col items-center gap-6 py-6 md:hidden">
+          {["About", "Experience", "Projects", "Contact"].map((item) => (
+            <a key={item} href={`#${item.toLowerCase()}`} onClick={() => setOpen(false)}>
+              {item}
+            </a>
+          ))}
+        </div>
+      )}
   </motion.nav>
-);
+)};
 
 const Hero = () => {
   const [textIndex, setTextIndex] = useState(0);
@@ -235,7 +238,7 @@ const Hero = () => {
       
       <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1.2, type: "spring" }}
         className="z-10">        
-        <motion.h1 className="text-6xl md:text-8xl font-bold mt-4 text-white tracking-wider" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
+        <motion.h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold mt-4 text-white tracking-wider" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}>
           Danish Ahmad
         </motion.h1>
         
@@ -248,12 +251,12 @@ const Hero = () => {
           </motion.span>
         </motion.p>
         
-        <motion.p className="mt-4 max-w-2xl text-gray-300 text-lg">
+        <motion.p className="mt-4 px-4 max-w-xl text-sm sm:text-base md:text-lg text-gray-300">
           building <span className="text-purple-300 font-semibold">high-tech web systems</span> and{" "}
           <span className="text-green-300 font-semibold">immersive digital experiences</span>
         </motion.p>
         
-        <motion.a href="#projects" className="mt-10 inline-block px-10 py-4 border-2 border-cyan-400 text-cyan-400 rounded-full font-mono font-bold text-lg backdrop-blur-md bg-black/30 hover:bg-cyan-400 hover:text-black transition-all duration-300" whileHover={{ scale: 1.08, boxShadow: "0 0 25px cyan" }} whileTap={{ scale: 0.98 }}>
+        <motion.a href="#projects" className="mt-6 px-6 py-3 inline-block border-2 border-cyan-400 text-cyan-400 rounded-full font-mono font-bold text-sm md:text-lg backdrop-blur-md bg-black/30 hover:bg-cyan-400 hover:text-black transition-all duration-300" whileHover={{ scale: 1.08, boxShadow: "0 0 25px cyan" }} whileTap={{ scale: 0.98 }}>
           ⚡ EXPLORE THE GRID ⚡
         </motion.a>
       </motion.div>
