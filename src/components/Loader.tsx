@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-const WORDS = ['Initializing', 'Composing shaders', 'Spawning particles', 'Entering NOVA'];
+const WORDS = ['Initializing', 'Composing shaders', 'Spawning particles', 'Entering DANISH.AI'];
 
 export default function Loader({ onDone }: { onDone: () => void }) {
   const [progress, setProgress] = useState(0);
@@ -62,7 +62,8 @@ export default function Loader({ onDone }: { onDone: () => void }) {
             transition={{ delay: 0.2 }}
             className="mt-10 font-serif text-5xl tracking-tight text-white"
           >
-            nova<span className="text-aurora-cyan">.</span>
+            
+DANISH<span className="text-aurora-cyan">.AI</span>
           </motion.h1>
 
           {/* progress */}
